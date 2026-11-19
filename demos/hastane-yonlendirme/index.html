@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pusula · Hastane İçi Yönlendirme ve Refakatçi Takibi (Demo)</title>
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--ink:#14213d;--mu:#6b778c;--line:#e4e8ef;--pri:#2563eb;--pri2:#dbe7ff;--ok:#16a34a;--okb:#dcfce7;--warn:#d97706;--warnb:#fef3c7;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45}
+header{height:60px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.lg{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem}
+.lg i{width:32px;height:32px;border-radius:10px;background:var(--pri);display:grid;place-items:center}
+.lg i svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2}
+.lg small{font-weight:400;color:var(--mu);font-size:.85rem;margin-left:8px;padding-left:12px;border-left:1px solid var(--line)}
+nav{display:flex;gap:6px}
+nav a{padding:8px 14px;border-radius:9px;color:var(--mu);font-size:.9rem;text-decoration:none}
+nav a.on{background:var(--pri2);color:var(--pri);font-weight:600}
+.hr{display:flex;gap:10px;align-items:center;color:var(--mu);font-size:.85rem}
+.hr b{width:34px;height:34px;border-radius:50%;background:#e8edf5;display:grid;place-items:center;color:var(--ink);font-size:.8rem}
+.app{display:grid;grid-template-columns:340px 1fr 320px;gap:16px;padding:16px;height:calc(100vh - 60px);min-height:760px}
+.pn{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;overflow:auto}
+h2{font-size:1.05rem;margin-bottom:12px}
+.sr{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--mu);margin-bottom:14px}
+.sr svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.fr{display:grid;gap:8px;margin-bottom:14px}
+.pt{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--bg)}
+.pt i{width:10px;height:10px;border-radius:50%;flex:none}
+.pt b{display:block;font-size:.9rem}
+.pt span{font-size:.78rem;color:var(--mu)}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.st div{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.st b{display:block;font-size:1.15rem}
+.st span{font-size:.75rem;color:var(--mu)}
+.tg{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:12px;font-size:.88rem}
+.sw{width:36px;height:20px;border-radius:999px;background:var(--pri);position:relative}
+.sw:after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+ol.steps{list-style:none;display:grid;gap:4px;counter-reset:s}
+ol.steps li{display:flex;gap:12px;padding:9px 6px;border-radius:9px}
+ol.steps li.on{background:var(--pri2)}
+ol.steps li:before{counter-increment:s;content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;background:#e8edf5;display:grid;place-items:center;font-size:.75rem;font-weight:700}
+ol.steps li.on:before{background:var(--pri);color:#fff}
+ol.steps b{display:block;font-size:.88rem}
+ol.steps span{font-size:.78rem;color:var(--mu)}
+.btn{display:block;width:100%;text-align:center;padding:12px;border-radius:10px;background:var(--pri);color:#fff;font-weight:600;margin-top:14px;border:0;font:inherit;font-weight:600}
+.map{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.mt{position:absolute;left:16px;top:14px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.82rem;box-shadow:0 2px 8px rgba(20,33,61,.06)}
+.fl{position:absolute;right:16px;top:60px;display:grid;gap:6px;z-index:2}
+.fl span{width:36px;height:36px;border-radius:10px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-weight:600;font-size:.85rem}
+.fl span.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.lgd{position:absolute;left:16px;bottom:14px;display:flex;gap:14px;font-size:.78rem;color:var(--mu);background:#fff;padding:8px 12px;border-radius:10px;border:1px solid var(--line)}
+.lgd i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.pc{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--bg);margin-bottom:14px}
+.av{width:42px;height:42px;border-radius:50%;background:#c7d7fe;display:grid;place-items:center;font-weight:700;color:var(--pri)}
+.pc b{display:block}
+.pc span{font-size:.8rem;color:var(--mu)}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--warnb);color:var(--warn);margin-top:3px}
+.tl{list-style:none;position:relative;margin:4px 0 14px}
+.tl li{position:relative;padding:0 0 16px 28px}
+.tl li:before{content:"";position:absolute;left:7px;top:18px;bottom:-2px;width:2px;background:var(--line)}
+.tl li:last-child:before{display:none}
+.tl li:after{content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:50%;border:2px solid var(--line);background:#fff}
+.tl li.dn:after{background:var(--ok);border-color:var(--ok)}
+.tl li.dn:before{background:var(--ok)}
+.tl li.ac:after{border-color:var(--warn);box-shadow:0 0 0 4px var(--warnb)}
+.tl b{display:block;font-size:.88rem}
+.tl span{font-size:.78rem;color:var(--mu)}
+.nt{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
+.nt div{display:flex;gap:10px;font-size:.82rem}
+.nt i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--pri);margin-top:6px}
+.nt span{color:var(--mu);display:block;font-size:.75rem}
+.lab{font-size:.75rem;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin:4px 0 8px;font-weight:600}
+footer{text-align:center;color:var(--mu);font-size:.78rem;padding:0 0 12px}
+@media(max-width:1100px){.app{grid-template-columns:1fr;height:auto}.map{min-height:520px}nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="lg"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></i>Pusula<small>Örnek Şehir Hastanesi</small></div>
+<nav><a class="on" href="#">Yol Tarifi</a><a href="#">Refakatçi Takibi</a><a href="#">Bölümler</a><a href="#">Randevularım</a></nav>
+<div class="hr">TR / EN<b>EY</b></div>
+</header>
+<div class="app">
+<aside class="pn">
+<h2>Kardiyoloji Polikliniği'ne yol tarifi</h2>
+<div class="sr"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Bölüm, doktor ya da oda ara…</div>
+<div class="fr">
+<div class="pt"><i style="background:var(--pri)"></i><div><b>Ana Giriş · Danışma</b><span>A Blok · Zemin kat</span></div></div>
+<div class="pt"><i style="background:#ef4444"></i><div><b>Kardiyoloji Polikliniği</b><span>B Blok · 2. kat · Oda 214</span></div></div>
+</div>
+<div class="st"><div><b>4 dk</b><span>yürüme</span></div><div><b>220 m</b><span>mesafe</span></div><div><b>1</b><span>asansör</span></div></div>
+<div class="tg"><span>Engelsiz rota (rampa ve asansör)</span><span class="sw"></span></div>
+<ol class="steps">
+<li class="on"><div><b>Danışmadan sağa dönün</b><span>Eczane tabelasını takip edin · 40 m</span></div></li>
+<li><div><b>B Blok asansörlerine ilerleyin</b><span>Kafeteryayı solunuzda bırakın · 90 m</span></div></li>
+<li><div><b>Asansörle 2. kata çıkın</b><span>Asansör 3 en yakın olanı</span></div></li>
+<li><div><b>Koridor sonunda sola dönün</b><span>Oda 214 sağ tarafta · 60 m</span></div></li>
+</ol>
+<button class="btn">Rotayı Telefona Gönder (QR)</button>
+</aside>
+
+<section class="map">
+<div class="mt"><span class="chip">📍 Zemin Kat · A–B Blok</span><span class="chip">Canlı konum: QR noktası #A-03</span></div>
+<div class="fl"><span>3</span><span>2</span><span>1</span><span class="on">Z</span></div>
+<svg viewBox="0 0 800 640" preserveAspectRatio="xMidYMid meet">
+
+<g fill="#fff" stroke="#cfd6e2" stroke-width="2">
+<rect x="60" y="80" width="300" height="220" rx="6"/>
+<rect x="60" y="340" width="300" height="220" rx="6"/>
+<rect x="430" y="80" width="300" height="480" rx="6"/>
+</g>
+<g fill="#eef2f8" stroke="#dbe1ea" stroke-width="1.5">
+<rect x="76" y="96" width="120" height="86" rx="4"/><rect x="208" y="96" width="136" height="86" rx="4"/>
+<rect x="76" y="196" width="120" height="88" rx="4"/>
+<rect x="76" y="356" width="268" height="80" rx="4"/>
+<rect x="76" y="476" width="130" height="68" rx="4"/><rect x="218" y="476" width="126" height="68" rx="4"/>
+<rect x="446" y="96" width="126" height="110" rx="4"/><rect x="584" y="96" width="130" height="110" rx="4"/>
+<rect x="584" y="220" width="130" height="120" rx="4"/>
+<rect x="446" y="420" width="126" height="124" rx="4"/><rect x="584" y="420" width="130" height="124" rx="4"/>
+</g>
+<rect x="208" y="196" width="136" height="88" rx="4" fill="#fdf1d8" stroke="#f3d79c"/>
+<rect x="446" y="220" width="126" height="120" rx="4" fill="#e3f6ea" stroke="#a9dfbd"/>
+<g font-family="Segoe UI,Arial" font-size="13" fill="#6b778c">
+<text x="90" y="144">Radyoloji</text><text x="222" y="144">Laboratuvar</text><text x="90" y="244">Eczane</text>
+<text x="222" y="236" fill="#b7791f">Kafeterya</text><text x="160" y="400">Acil Servis</text>
+<text x="90" y="514">Kan Alma</text><text x="232" y="514">Vezne</text>
+<text x="460" y="156">Göz</text><text x="598" y="156">KBB</text>
+<text x="458" y="314" fill="#15803d" font-weight="600">Asansör 3 → 2. kat</text><text x="458" y="330" fill="#15803d" font-size="11">B Blok asansörleri</text>
+<text x="598" y="284">Ortopedi</text><text x="460" y="486">Nöroloji</text><text x="598" y="486">Dahiliye</text>
+<text x="210" y="610" font-size="12">A Blok</text><text x="560" y="610" font-size="12">B Blok</text>
+</g>
+<path d="M150 318 L395 318 L395 280 L508 280" fill="none" stroke="#2563eb" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity=".14"/>
+<path d="M150 318 L395 318 L395 280 L508 280" fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0"/>
+<g transform="translate(150 318)"><circle r="18" fill="#2563eb" opacity=".18"/><circle r="9" fill="#2563eb" stroke="#fff" stroke-width="3"/></g>
+<g transform="translate(118 350)"><rect x="-6" y="0" width="98" height="26" rx="13" fill="#14213d"/><text x="43" y="17" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" fill="#fff">Buradasınız</text></g>
+<g transform="translate(508 280)"><path d="M0 0 C-14 -16 -16 -24 -16 -30 A16 16 0 0 1 16 -30 C16 -24 14 -16 0 0Z" fill="#ef4444" stroke="#fff" stroke-width="2"/><circle cy="-30" r="6" fill="#fff"/></g>
+</svg>
+<div class="lgd"><span><i style="background:#2563eb"></i>Rota</span><span><i style="background:#a9dfbd"></i>Asansör</span><span><i style="background:#f3d79c"></i>Dinlenme alanı</span></div>
+</section>
+
+<aside class="pn">
+<h2>Refakatçi Takibi</h2>
+<div class="pc"><div class="av">AY</div><div><b>Ayşe Y. (Hasta)</b><span>Genel Cerrahi · Ameliyathane 2</span><br><span class="badge">Ameliyatta</span></div></div>
+<div class="lab">Bugünkü süreç</div>
+<ul class="tl">
+<li class="dn"><b>Kayıt ve hazırlık</b><span>08:10 · Tamamlandı</span></li>
+<li class="dn"><b>Ameliyathaneye alındı</b><span>09:05</span></li>
+<li class="ac"><b>Ameliyat devam ediyor</b><span>Tahmini bitiş 11:30</span></li>
+<li><b>Uyandırma odası</b><span>Bekleniyor</span></li>
+<li><b>Servise çıkış · Oda 412</b><span>Bekleniyor</span></li>
+</ul>
+<div class="lab">Bildirimler</div>
+<div class="nt">
+<div><i></i><p>Hastanız ameliyathaneye alındı.<span>09:05 · SMS gönderildi</span></p></div>
+<div><i style="background:var(--ok)"></i><p>Bekleme salonu: B Blok 1. kat.<span>Rota hazır · 2 dk</span></p></div>
+</div>
+<button class="btn" style="background:#14213d">Bekleme Salonuna Yol Tarifi</button>
+</aside>
+</div>
+<footer>Pusula · kurgusal bir hastane için hazırlanmış demo arayüzdür.</footer>
+</body>
+</html>
