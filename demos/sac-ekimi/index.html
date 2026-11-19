@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Folia Saç Ekim Merkezi · Demo</title>
+<meta name="description" content="Saç ekimi kliniği web sitesi demo tasarımı: FUE, DHI, Safir FUE, ücretsiz online saç analizi.">
+<style>
+:root{--bg:#0d0f12;--bg2:#14171c;--card:#181c22;--ink:#f3efe8;--mu:#a29a8e;--gold:#c9a46a;--gold2:#e3c48f;--line:rgba(255,255,255,.08);--r:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit;text-decoration:none}
+.w{max-width:1200px;margin:0 auto;padding:0 28px}
+.serif{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+header{position:sticky;top:0;z-index:10;background:rgba(13,15,18,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.3rem;letter-spacing:.02em}
+.logo svg{width:30px;height:30px}
+.nav ul{display:flex;gap:32px;list-style:none;font-size:.93rem;color:var(--mu)}
+.nav ul a:hover{color:var(--gold2)}
+.nr{display:flex;align-items:center;gap:16px;font-size:.85rem;color:var(--mu)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:600;font-size:.94rem;border:0;cursor:pointer;transition:transform .15s,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.bg{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1a140b}
+.bl{border:1px solid rgba(201,164,106,.45);color:var(--gold2);background:transparent}
+.hero{position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;right:-10%;top:-20%;width:70%;height:140%;background:radial-gradient(closest-side,rgba(201,164,106,.16),transparent);pointer-events:none}
+.hg{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;padding:72px 0 84px;position:relative}
+.kick{display:inline-flex;gap:10px;align-items:center;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2)}
+.kick:before{content:"";width:34px;height:1px;background:var(--gold)}
+h1{font-size:3.6rem;line-height:1.05;letter-spacing:-.01em;margin:22px 0 20px}
+h1 em{font-style:italic;color:var(--gold2)}
+.lead{font-size:1.1rem;color:var(--mu);max-width:520px}
+.cta{display:flex;gap:12px;margin:32px 0 40px;flex-wrap:wrap}
+.tech{display:flex;gap:10px;flex-wrap:wrap}
+.tech span{padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:.84rem;color:var(--mu);background:rgba(255,255,255,.02)}
+.vis{position:relative;aspect-ratio:1/1.02;border-radius:28px;background:linear-gradient(160deg,#1c2027,#101318);border:1px solid var(--line);overflow:hidden}
+.vis svg.head{position:absolute;inset:8% 10% 0 10%;width:80%;height:92%}
+.card{position:absolute;background:rgba(24,28,34,.92);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:.85rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.card b{display:block;font-size:1.25rem;color:var(--gold2)}
+.card span{color:var(--mu)}
+.k1{left:6%;top:10%}
+.k2{right:6%;bottom:10%}
+.k3{right:7%;top:38%;display:flex;gap:10px;align-items:center}
+.k3 i{width:9px;height:9px;border-radius:50%;background:#59d38c;box-shadow:0 0 0 4px rgba(89,211,140,.18)}
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)}
+.strip .w{display:grid;grid-template-columns:repeat(4,1fr)}
+.strip div div{padding:26px 0;text-align:center;border-left:1px solid var(--line)}
+.strip div div:first-child{border-left:0}
+.strip b{display:block;font-size:1.9rem;color:var(--gold2)}
+.strip span{font-size:.85rem;color:var(--mu)}
+section{padding:88px 0}
+.eb{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px}
+.sh h2,.h2{font-size:2.5rem;line-height:1.12}
+.sh p{color:var(--mu);max-width:430px}
+.mth{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.m{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px;position:relative;transition:border-color .2s}
+.m:hover{border-color:rgba(201,164,106,.5)}
+.m .tag{position:absolute;top:22px;right:22px;font-size:.72rem;padding:4px 10px;border-radius:999px;background:rgba(201,164,106,.14);color:var(--gold2)}
+.m h3{font-size:1.5rem;margin:6px 0 10px}
+.m p{color:var(--mu);font-size:.93rem}
+.m ul{list-style:none;margin-top:18px;display:grid;gap:8px;font-size:.9rem}
+.m li:before{content:"— ";color:var(--gold)}
+.pk{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.pk p{color:var(--mu);margin-top:14px}
+.inc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.inc>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;gap:14px;align-items:flex-start}
+.inc svg{flex:none;width:26px;height:26px;stroke:var(--gold2);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.inc b{display:block;font-size:.98rem}
+.inc span{color:var(--mu);font-size:.85rem}
+.tl{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.tl:before{content:"";position:absolute;left:0;right:0;top:9px;height:1px;background:linear-gradient(90deg,var(--gold),rgba(201,164,106,.1))}
+.tl div{position:relative;padding-top:34px}
+.tl div:before{content:"";position:absolute;left:0;top:2px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.tl b{display:block;color:var(--gold2);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.tl h4{font-size:1.05rem;margin:4px 0 4px}
+.tl p{color:var(--mu);font-size:.88rem}
+.an{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.an .l{padding:48px;background:linear-gradient(160deg,rgba(201,164,106,.14),transparent 70%)}
+.an .l p{color:var(--mu);margin:14px 0 24px}
+.an .l ol{list-style:none;display:grid;gap:12px;counter-reset:a}
+.an .l li{display:flex;gap:12px;align-items:center;font-size:.93rem}
+.an .l li:before{counter-increment:a;content:counter(a);width:26px;height:26px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-size:.8rem;color:var(--gold2);flex:none}
+form{padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form label{display:grid;gap:7px;font-size:.84rem;color:var(--mu)}
+form .f{grid-column:1/-1}
+input,select,textarea{font:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:1px solid var(--gold);border-color:transparent}
+.nw{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.nw input{display:none}
+.nw label{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:10px 4px 8px;text-align:center;background:var(--bg);transition:border-color .2s}
+.nw svg{width:100%;height:34px}
+.nw small{display:block;font-size:.72rem;color:var(--mu)}
+.nw input:checked+label{border-color:var(--gold);background:rgba(201,164,106,.08)}
+.up{border:1px dashed rgba(201,164,106,.4);border-radius:12px;padding:16px;text-align:center;color:var(--mu);font-size:.88rem;cursor:pointer}
+.ok{grid-column:1/-1;display:none;padding:12px 14px;border-radius:12px;background:rgba(89,211,140,.12);color:#8fe3b2}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--mu);font-size:.86rem}
+footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.wa{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+.wa svg{width:30px;height:30px;fill:#fff}
+@media(max-width:980px){.hg,.pk,.an{grid-template-columns:1fr}.mth{grid-template-columns:1fr}.tl{grid-template-columns:1fr 1fr}.tl:before{display:none}.nav ul,.nr span{display:none}h1{font-size:2.7rem}.strip .w{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.inc,form{grid-template-columns:1fr}.nw{grid-template-columns:repeat(3,1fr)}.an .l,form{padding:28px}.sh{flex-direction:column;align-items:start}.sh h2,.h2{font-size:2rem}}
+</style>
+</head>
+<body>
+<header><div class="w nav">
+<a class="logo serif" href="#"><svg viewBox="0 0 32 32" fill="none" stroke="#c9a46a" stroke-width="1.6" stroke-linecap="round"><path d="M16 29V13"/><path d="M16 17c-5 0-8-4-8-9 5 0 8 4 8 9z"/><path d="M16 13c4 0 7-3 7-8-4 0-7 3-7 8z"/></svg>Folia</a>
+<ul><li><a href="#teknikler">Teknikler</a></li><li><a href="#paket">Paket</a></li><li><a href="#surec">Süreç</a></li><li><a href="#analiz">Ücretsiz Analiz</a></li></ul>
+<div class="nr"><span>TR · EN · DE · AR</span><a class="btn bg" href="#analiz">Analiz İste</a></div>
+</div></header>
+
+<main>
+<div class="hero"><div class="w hg">
+<div>
+<span class="kick">Saç Ekim Merkezi · İstanbul</span>
+<h1 class="serif">Saçlarınız geri gelsin,<br><em>doğallığından</em> ödün vermeden.</h1>
+<p class="lead">FUE, DHI ve Safir FUE tekniklerinde uzman ekibimizle, yüz hatlarınıza uygun saç çizgisini birlikte tasarlıyoruz. Fotoğraflarınızı gönderin, 24 saat içinde kişisel greft planınızı alın.</p>
+<div class="cta"><a class="btn bg" href="#analiz">Ücretsiz Saç Analizi →</a><a class="btn bl" href="#teknikler">Teknikleri İncele</a></div>
+<div class="tech"><span>Safir FUE</span><span>DHI (Choi kalemi)</span><span>Sakal ve kaş ekimi</span><span>PRP destekli</span></div>
+</div>
+<div class="vis" aria-hidden="true">
+<svg class="head" viewBox="0 0 400 420">
+<defs><radialGradient id="sk" cx=".45" cy=".35" r=".8"><stop offset="0" stop-color="#3a3029"/><stop offset="1" stop-color="#1f1a16"/></radialGradient></defs>
+<path d="M110 400c0-40 10-70 20-90-30-20-50-60-50-120C80 90 140 30 220 30c80 0 130 60 130 140 0 30-6 52-14 70l18 34c4 8-2 14-10 14h-14l4 30c2 18-10 30-28 30h-30l-6 52z" fill="url(#sk)" stroke="rgba(201,164,106,.35)" stroke-width="1.5"/>
+<path d="M118 150c10-70 70-108 130-104 50 4 92 40 100 96" fill="none" stroke="#c9a46a" stroke-width="2" stroke-dasharray="3 7" stroke-linecap="round"/>
+<g fill="#e3c48f">
+<circle cx="140" cy="118" r="2.6"/><circle cx="156" cy="100" r="2.6"/><circle cx="174" cy="86" r="2.6"/><circle cx="194" cy="76" r="2.6"/><circle cx="216" cy="70" r="2.6"/><circle cx="238" cy="68" r="2.6"/><circle cx="260" cy="70" r="2.6"/><circle cx="282" cy="76" r="2.6"/><circle cx="302" cy="86" r="2.6"/><circle cx="320" cy="100" r="2.6"/>
+<circle cx="150" cy="128" r="2" opacity=".7"/><circle cx="166" cy="110" r="2" opacity=".7"/><circle cx="184" cy="96" r="2" opacity=".7"/><circle cx="205" cy="88" r="2" opacity=".7"/><circle cx="227" cy="84" r="2" opacity=".7"/><circle cx="249" cy="84" r="2" opacity=".7"/><circle cx="271" cy="88" r="2" opacity=".7"/><circle cx="292" cy="96" r="2" opacity=".7"/><circle cx="311" cy="110" r="2" opacity=".7"/>
+<circle cx="176" cy="122" r="1.6" opacity=".45"/><circle cx="196" cy="108" r="1.6" opacity=".45"/><circle cx="218" cy="100" r="1.6" opacity=".45"/><circle cx="240" cy="98" r="1.6" opacity=".45"/><circle cx="262" cy="100" r="1.6" opacity=".45"/><circle cx="284" cy="108" r="1.6" opacity=".45"/><circle cx="302" cy="122" r="1.6" opacity=".45"/>
+</g>
+<path d="M126 132c-6 10-8 22-8 30" stroke="#c9a46a" stroke-width="1.4" fill="none" opacity=".6"/>
+</svg>
+<div class="card k1"><span>Planlanan greft</span><b>3.200</b><span>Safir FUE · tek seans</span></div>
+<div class="card k3"><i></i><span>Uzman hekim çevrimiçi</span></div>
+<div class="card k2"><span>Saç çizgisi tasarımı</span><b>Doğal geçiş</b><span>Yüz oranlarına göre</span></div>
+</div>
+</div></div>
+
+<div class="strip"><div class="w">
+<div><b>12.000+</b><span>başarılı operasyon</span></div>
+<div><b>%98</b><span>greft tutunma hedefi</span></div>
+<div><b>40+</b><span>ülkeden hasta</span></div>
+<div><b>Ömür boyu</b><span>sertifikalı garanti</span></div>
+</div></div>
+
+<section id="teknikler"><div class="w">
+<div class="sh"><div><div class="eb">Teknikler</div><h2 class="serif">Size uygun yöntemi<br>birlikte seçelim.</h2></div><p>Saç tipiniz, donör bölgenizin yoğunluğu ve beklentinize göre hekimimiz en uygun tekniği önerir.</p></div>
+<div class="mth">
+<div class="m"><span class="tag">En çok tercih edilen</span><div class="eb">01</div><h3 class="serif">Safir FUE</h3><p>Safir uçlu bıçaklarla açılan mikro kanallar sayesinde daha az doku hasarı ve daha hızlı iyileşme.</p><ul><li>Yüksek yoğunluklu ekim</li><li>Minimal kabuklanma</li><li>Geniş açıklıklar için ideal</li></ul></div>
+<div class="m"><div class="eb">02</div><h3 class="serif">DHI</h3><p>Choi kalemiyle kanal açmadan doğrudan ekim; tıraşsız ekim imkânı ve hassas açı kontrolü.</p><ul><li>Tıraşsız seçenek</li><li>Ön saç çizgisinde hassasiyet</li><li>Sık ekim</li></ul></div>
+<div class="m"><div class="eb">03</div><h3 class="serif">Sakal &amp; Kaş</h3><p>Seyrek sakal ve kaş bölgeleri için yüz hatlarınıza uygun, doğal yönlendirmeli ekim.</p><ul><li>Tek kök greftler</li><li>Doğal çıkış açısı</li><li>Lokal anestezi</li></ul></div>
+</div>
+</div></section>
+
+<section id="paket" style="padding-top:0"><div class="w pk">
+<div><div class="eb">Her Şey Dahil Paket</div><h2 class="serif h2">Siz sadece gelin,<br>gerisini biz düşünelim.</h2><p>Yurt dışından gelen hastalarımız için konaklamadan çeviriye kadar tüm süreci tek pakette planlıyoruz. Fiyat, analiz sonrası greft sayısına göre yazılı olarak iletilir.</p><div class="cta" style="margin-bottom:0"><a class="btn bg" href="#analiz">Paket Fiyatı Al</a></div></div>
+<div class="inc">
+<div><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg><div><b>4–5* Otel</b><span>2–3 gece konaklama</span></div></div>
+<div><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="3"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg><div><b>VIP Transfer</b><span>Havalimanı – otel – klinik</span></div></div>
+<div><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg><div><b>Tercüman</b><span>EN · DE · AR · FR</span></div></div>
+<div><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Garanti Belgesi</b><span>Operasyon sonrası sertifika</span></div></div>
+<div><svg viewBox="0 0 24 24"><path d="M10 3h4v6l5 9a2 2 0 01-2 3H7a2 2 0 01-2-3l5-9z"/></svg><div><b>PRP &amp; İlaçlar</b><span>İyileşme seti dahil</span></div></div>
+<div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>12 Ay Takip</b><span>Online kontrol görüşmeleri</span></div></div>
+</div>
+</div></section>
+
+<section id="surec" style="padding-top:0"><div class="w">
+<div class="sh"><div><div class="eb">Süreç</div><h2 class="serif">Analizden yeni saçlarınıza</h2></div><p>Ekimden sonraki ilk yıl boyunca her aşamada ne olacağını önceden biliyorsunuz.</p></div>
+<div class="tl">
+<div><b>Gün 0</b><h4>Online analiz</h4><p>Fotoğraflarınızla greft sayısı ve fiyat planı.</p></div>
+<div><b>Gün 1</b><h4>Operasyon</h4><p>Saç çizgisi çizimi ve 6–8 saatlik ekim.</p></div>
+<div><b>Gün 2</b><h4>İlk yıkama</h4><p>Pansuman, kontrol ve bakım eğitimi.</p></div>
+<div><b>3. Ay</b><h4>İlk çıkışlar</h4><p>Yeni saçlar görünmeye başlar.</p></div>
+<div><b>12. Ay</b><h4>Nihai sonuç</h4><p>Saçlar tam yoğunluğuna ulaşır.</p></div>
+</div>
+</div></section>
+
+<section id="analiz" style="padding-top:0"><div class="w">
+<div class="an">
+<div class="l"><div class="eb">Ücretsiz Online Analiz</div><h2 class="serif h2">24 saat içinde<br>kişisel planınız.</h2><p>Kliniğe gelmeden önce hekimimiz fotoğraflarınızı inceler; greft sayısı, teknik ve fiyatı içeren planınızı WhatsApp veya e-postayla gönderir.</p>
+<ol><li>Saç dökülme seviyenizi seçin</li><li>Ön, tepe ve arka fotoğraflarınızı yükleyin</li><li>Planınızı ücretsiz alın</li></ol></div>
+<form onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.reset()">
+<div class="f"><label style="margin-bottom:8px">Dökülme seviyesi (Norwood)</label>
+<div class="nw">
+<input type="radio" name="n" id="n2"><label for="n2"><svg viewBox="0 0 40 34"><path d="M6 32c0-16 6-28 14-28s14 12 14 28" fill="none" stroke="#a29a8e" stroke-width="1.5"/><path d="M8 18c2-8 7-12 12-12s10 4 12 12" stroke="#c9a46a" stroke-width="4" fill="none" stroke-linecap="round"/></svg><small>2</small></label>
+<input type="radio" name="n" id="n3" checked><label for="n3"><svg viewBox="0 0 40 34"><path d="M6 32c0-16 6-28 14-28s14 12 14 28" fill="none" stroke="#a29a8e" stroke-width="1.5"/><path d="M8 22c1-6 4-10 7-12M32 22c-1-6-4-10-7-12M16 9c3-1 5-1 8 0" stroke="#c9a46a" stroke-width="4" fill="none" stroke-linecap="round"/></svg><small>3</small></label>
+<input type="radio" name="n" id="n4"><label for="n4"><svg viewBox="0 0 40 34"><path d="M6 32c0-16 6-28 14-28s14 12 14 28" fill="none" stroke="#a29a8e" stroke-width="1.5"/><path d="M8 26c0-5 2-9 5-11M32 26c0-5-2-9-5-11" stroke="#c9a46a" stroke-width="4" fill="none" stroke-linecap="round"/></svg><small>4</small></label>
+<input type="radio" name="n" id="n5"><label for="n5"><svg viewBox="0 0 40 34"><path d="M6 32c0-16 6-28 14-28s14 12 14 28" fill="none" stroke="#a29a8e" stroke-width="1.5"/><path d="M7 30c0-4 1-7 3-9M33 30c0-4-1-7-3-9" stroke="#c9a46a" stroke-width="4" fill="none" stroke-linecap="round"/></svg><small>5</small></label>
+<input type="radio" name="n" id="n6"><label for="n6"><svg viewBox="0 0 40 34"><path d="M6 32c0-16 6-28 14-28s14 12 14 28" fill="none" stroke="#a29a8e" stroke-width="1.5"/><path d="M7 32c0-2 0-4 1-5M33 32c0-2 0-4-1-5" stroke="#c9a46a" stroke-width="4" fill="none" stroke-linecap="round"/></svg><small>6</small></label>
+<input type="radio" name="n" id="n7"><label for="n7"><svg viewBox="0 0 40 34"><path d="M6 32c0-16 6-28 14-28s14 12 14 28" fill="none" stroke="#a29a8e" stroke-width="1.5"/></svg><small>7</small></label>
+</div></div>
+<label>Ad Soyad<input required placeholder="Adınız"></label>
+<label>WhatsApp<input required type="tel" placeholder="+90 5xx xxx xx xx"></label>
+<label>Ülke<select><option>Türkiye</option><option>Almanya</option><option>Birleşik Krallık</option><option>Suudi Arabistan</option><option>Diğer</option></select></label>
+<label>İlgilendiğiniz işlem<select><option>Saç ekimi</option><option>Sakal ekimi</option><option>Kaş ekimi</option><option>Emin değilim</option></select></label>
+<label class="f">Fotoğraflar<div class="up" onclick="this.textContent='Demo: fotoğraf yükleme bu sürümde kapalı.'">↑ Ön, tepe ve arka fotoğraflarınızı sürükleyin ya da seçin</div></label>
+<button class="btn bg f">Ücretsiz Planımı Gönder</button>
+<div class="ok">Teşekkürler! Talebiniz alındı (demo).</div>
+</form>
+</div>
+</div></section>
+</main>
+
+<footer><div class="w"><span>© 2026 Folia Saç Ekim Merkezi</span><span>Bu sayfa kurgusal bir klinik için hazırlanmış demo tasarımdır.</span></div></footer>
+<a class="wa" href="#analiz" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.6 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.2 1.4 2.5 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+</body>
+</html>
